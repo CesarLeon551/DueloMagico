@@ -1,0 +1,94 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a23;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#duel-container {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+#bot-section {
+  margin-bottom: 20px;
+}
+
+#bot-spell {
+  font-size: 1.5rem;
+  color: #ffcc00;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px dashed #ffcc00;
+  border-radius: 8px;
+}
+
+#game-section {
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+#result-section {
+  margin-top: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0b0c1a;
+    color: #ffffff;
+    text-align: center;
+}
+
+#card-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las cartas se ajusten si el espacio es limitado */
+    justify-content: center; /* Centra las cartas horizontalmente */
+    margin-top: 20px; /* Espacio entre "Selecciona tu carta" y las cartas */
+    gap: 15px; /* Espacio entre las cartas */
+}
+
+.card {
+    background-color: #1c1f2e;
+    border: 2px dashed yellow;
+    border-radius: 10px;
+    padding: 10px;
+    width: 150px; /* Ajusta el ancho de cada carta */
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 16px;
+    color: #f0e68c;
+    margin: 5px 0;
+}
+
+.card p {
+    font-size: 12px;
+    color: #d3d3d3;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.5);
+}
+

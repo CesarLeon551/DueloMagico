@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duelo de Hechizos - Juego de Cartas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="duel-container">
+        <!-- Zona del Bot -->
+        <div id="bot-section">
+            <h2>El hechizo del Bot:</h2>
+            <div id="bot-spell"></div>
+        </div>
+
+        <!-- Zona del Juego -->
+        <div id="game-section">
+            <h2>Selecciona tu carta:</h2>
+            <div id="card-container">
+                <!-- Las cartas del jugador se generarán aquí -->
+            </div>
+        </div>
+
+        <!-- Zona de Resultado -->
+        <div id="result-section" class="hidden">
+            <h2 id="result-text"></h2>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
