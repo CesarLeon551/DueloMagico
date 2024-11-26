@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duelo de Hechizos - Juego de Cartas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="player-info" class="player-info"></div>
+
+    <!-- Configuración del jugador -->
+    <div id="player-setup" class="player-setup">
+        <h2>Configura tu partida</h2>
+        <label for="player-name">Nombre del jugador:</label>
+        <input type="text" id="player-name" placeholder="Ingresa tu nombre" />
+        
+        <label for="player-house">Selecciona tu casa:</label>
+        <select id="player-house">
+            <option value="">Selecciona tu casa</option>
+            <option value="Gryffindor">Gryffindor</option>
+            <option value="Slytherin">Slytherin</option>
+            <option value="Hufflepuff">Hufflepuff</option>
+            <option value="Ravenclaw">Ravenclaw</option>
+        </select>
+        
+        <button id="start-button">Iniciar Juego</button>
+    </div>
+
+    <!-- Zona de Duelo -->
+    <div id="duel-container">
+        <!-- Zona del Bot -->
+        <div id="bot-section">
+            <h2>El hechizo del Bot:</h2>
+            <div id="bot-spell"></div>
+        </div>
+
+        <!-- Zona del Juego -->
+        <div id="game-section">
+            <h2>Selecciona tu carta:</h2>
+            <div id="card-container">
+                <!-- Las cartas del jugador se generarán aquí -->
+            </div>
+        </div>
+
+        <!-- Zona de Resultado -->
+        <div id="result-section" class="hidden">
+            <h2 id="result-text"></h2>
+            <button id="restart-button">Reiniciar Juego</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

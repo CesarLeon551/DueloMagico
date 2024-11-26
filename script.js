@@ -128,6 +128,9 @@ const effectivenessMap = {
   },
 };
 
+// Almacenamiento de nombres y casas
+const usedNames = new Set();
+
 function createCard(spell) {
   return `
     <div class="card" data-spell="${spell.name}">
@@ -153,11 +156,11 @@ function displayPlayerOptions(botSpell) {
       const resultSection = document.getElementById('result-section');
       
       if (playerSpell === veryEffective.name) {
-        resultText.textContent = `¡Ganaste! ${playerSpell} es muy eficaz contra ${botSpell} ten 2000 puntos.`;
+        resultText.textContent = `¡Ganaste! ${playerSpell} es muy eficaz contra ${botSpell}. Ten 2000 puntos.`;
       } else if (playerSpell === effective.name) {
-        resultText.textContent = `¡Empate! ${playerSpell} es eficaz contra ${botSpell} Buen intento ten 1500 puntos.`;
+        resultText.textContent = `¡Empate! ${playerSpell} es eficaz contra ${botSpell}. Buen intento, ten 1500 puntos.`;
       } else {
-        resultText.textContent = `Perdiste... ${playerSpell} es poco eficaz contra ${botSpell} Recorcholiz casi ten 1000 puntos por intentarlo.`;
+        resultText.textContent = `Perdiste... ${playerSpell} es poco eficaz contra ${botSpell}. Recorcholiz casi, ten 1000 puntos por intentarlo.`;
       }
       resultSection.classList.remove('hidden');
     });
@@ -165,6 +168,31 @@ function displayPlayerOptions(botSpell) {
 }
 
 function startDuel() {
+  const nameInput = document.getElementById('player-name').value.trim();
+  const houseInput = document.getElementById('player-house').value.trim();
+
+  if (!nameInput || !houseInput) {
+    alert('Por favor ingresa tu nombre y selecciona una casa.');
+    return;
+  }
+
+  const formattedName = nameInput.toLowerCase(); // Normalizar el nombre para evitar variaciones
+  const fullName = `${formattedName} (${houseInput.toLowerCase()})`;
+
+  if (usedNames.has(formattedName)) {
+    alert('Este nombre ya fue utilizado en otra casa. Por favor, elige otro.');
+    return;
+  }
+
+  if (usedNames.has(fullName)) {
+    alert('Este nombre ya fue utilizado en esta casa. Por favor, elige otro.');
+    return;
+  }
+
+  // Agregar el nombre y la combinación a la lista de usados
+  usedNames.add(formattedName);
+  usedNames.add(fullName);
+
   const botSpell = botSpells[Math.floor(Math.random() * botSpells.length)];
   document.getElementById('bot-spell').textContent = `El bot lanzó: ${botSpell}`;
   displayPlayerOptions(botSpell);
@@ -175,4 +203,6 @@ document.getElementById('restart-button').addEventListener('click', () => {
   startDuel();
 });
 
-document.addEventListener('DOMContentLoaded', startDuel);
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('start-button').addEventListener('click', startDuel);
+});

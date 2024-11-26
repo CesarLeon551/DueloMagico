@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Hechizos</title>
+  <style>
+    body {
+      background-color: #0b0b33;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    #game-container {
+      margin: 0 auto;
+      width: 80%;
+    }
+
+    #player-spells button {
+      background-color: #1f6fe5;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #player-spells button:hover {
+      background-color: #1452a3;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Juego de Hechizos!</h1>
+  <div id="game-container">
+    <h2>Elige tu hechizo:</h2>
+    <div id="player-spells">
+      <button onclick="playGame('Expelliarmus')">Expelliarmus</button>
+      <button onclick="playGame('Protego')">Protego</button>
+      <button onclick="playGame('Lumos')">Lumos</button>
+      <button onclick="playGame('Stupefy')">Stupefy</button>
+      <button onclick="playGame('Avada Kedavra')">Avada Kedavra</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    // Lista de hechizos del bot
+    const botSpells = [
+      { name: "Stupefy", description: "Aturde al oponente.", effectiveness: "ataque" },
+      { name: "Expelliarmus", description: "Desarma al oponente.", effectiveness: "estrategia" },
+      { name: "Protego", description: "Defensa básica.", effectiveness: "defensa" },
+      { name: "Lumos", description: "Ilumina la oscuridad.", effectiveness: "neutral" },
+      { name: "Petrificus Totalus", description: "Inmoviliza al oponente.", effectiveness: "ataque" },
+      { name: "Sectumsempra", description: "Ataque de corte profundo.", effectiveness: "ataque" },
+      { name: "Obliviate", description: "Borra los recuerdos del oponente.", effectiveness: "estrategia" },
+    ];
+
+    // Lista de hechizos del jugador
+    const playerSpells = [
+      { name: "Expelliarmus", effectiveness: { "ataque": "muy eficaz", "defensa": "poco eficaz" } },
+      { name: "Protego", effectiveness: { "ataque": "eficaz", "estrategia": "muy eficaz" } },
+      { name: "Lumos", effectiveness: { "neutral": "eficaz" } },
+      { name: "Stupefy", effectiveness: { "defensa": "muy eficaz", "estrategia": "poco eficaz" } },
+      { name: "Avada Kedavra", effectiveness: { "ataque": "muy eficaz", "neutral": "eficaz" } },
+    ];
+
+    // Función para que el bot seleccione un hechizo
+    function botSelectSpell(difficulty, playerSpell) {
+      if (difficulty === "advanced") {
+        // Selección avanzada: basarse en el hechizo del jugador
+        const counters = botSpells.filter(spell => spell.effectiveness === playerSpell.effectiveness["ataque"]);
+        return counters[Math.floor(Math.random() * counters.length)] || botSpells[Math.floor(Math.random() * botSpells.length)];
+      }
+      // Selección aleatoria para dificultades más bajas
+      return botSpells[Math.floor(Math.random() * botSpells.length)];
+    }
+
+    // Función para calcular el resultado
+    function calculateResult(playerSpell, botSpell) {
+      const effectiveness = playerSpell.effectiveness[botSpell.effectiveness];
+      if (effectiveness === "muy eficaz") {
+        return "¡Ganaste! Tu hechizo fue muy eficaz contra el hechizo del bot.";
+      } else if (effectiveness === "eficaz") {
+        return "Empate: Ambos hechizos fueron igualmente eficaces.";
+      } else if (effectiveness === "poco eficaz") {
+        return "Perdiste: El hechizo del bot fue más eficaz.";
+      } else {
+        return "Empate: Los hechizos no tuvieron efecto.";
+      }
+    }
+
+    // Función principal del juego
+    function playGame(playerChoice) {
+      const playerSpell = playerSpells.find(spell => spell.name === playerChoice);
+      const botSpell = botSelectSpell("advanced", playerSpell);
+
+      const resultMessage = calculateResult(playerSpell, botSpell);
+
+      // Mostrar resultados
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `
+        <p>Tu hechizo: <strong>${playerSpell.name}</strong></p>
+        <p>El hechizo del bot: <strong>${botSpell.name}</strong></p>
+        <p>${resultMessage}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
