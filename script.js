@@ -156,7 +156,7 @@ function displayPlayerOptions(botSpell) {
       const resultSection = document.getElementById('result-section');
       
       if (playerSpell === veryEffective.name) {
-        resultText.textContent = `¡Ganaste! ${playerSpell} es muy eficaz contra ${botSpell}. Ten 2000 puntos.`;
+        resultText.textContent = `¡Ganaste! ${playerSpell} es muy eficaz contra ${botSpell}. Ten 3000 puntos.`;
       } else if (playerSpell === effective.name) {
         resultText.textContent = `¡Empate! ${playerSpell} es eficaz contra ${botSpell}. Buen intento, ten 1500 puntos.`;
       } else {
